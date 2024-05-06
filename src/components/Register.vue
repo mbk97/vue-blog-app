@@ -8,6 +8,7 @@ import {
 } from "../utils/util.js";
 import { checkPasswordValidator } from "../utils/passwordValidator";
 import { useRouter } from "vue-router";
+import { saveToLocalStorage } from "../utils/userDetails";
 
 const name = ref("");
 const email = ref("");
@@ -47,6 +48,7 @@ const handleRegister = async () => {
     );
     if (response.status === 201) {
       toastSuccessNotification(response.data.message);
+      saveToLocalStorage(response?.data.user);
       router.push("/dashboard");
     }
   } catch (error) {

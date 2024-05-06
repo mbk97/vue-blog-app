@@ -1,14 +1,21 @@
 <script setup>
 import logo from "../assets/images/blog-logo.png";
 import { ref } from "vue";
+import { getFromLocalStorage } from "../utils/userDetails";
 
 const open = ref(false);
+const userData = getFromLocalStorage("user-details");
+
+const name = userData?.name.split(" ");
+const nameLogo = name[0];
+const Nlogo = nameLogo?.substring(0, 1);
+console.log(Nlogo);
 
 const navItems = [
   {
     id: 1,
     text: "Lastest",
-    link: "/latest",
+    link: "/dashboard",
     icon: "pi-chart-line",
   },
   {
@@ -30,19 +37,25 @@ const handleCloseMenu = () => {
   <div>
     <div class="container">
       <div :class="[open ? 'active' : '', 'sidebar-wrapper']">
-        <div class="close-menu-toggle" @click="handleCloseMenu">
-          <i class="pi pi-times" style="font-size: 1rem"></i>
+        <div>
+          <div class="close-menu-toggle" @click="handleCloseMenu">
+            <i class="pi pi-times" style="font-size: 1rem"></i>
+          </div>
+          <div class="logo-wrapper">
+            <img :src="logo" alt="Logo" height="40" />
+          </div>
+          <div v-for="nav in navItems" :key="nav.id" class="link-wrapper">
+            <router-link :to="nav.link" class="link">
+              <span>
+                <i :class="['pi', nav.icon]" style="font-size: 1rem"></i
+              ></span>
+              {{ nav.text }}</router-link
+            >
+          </div>
         </div>
-        <div class="logo-wrapper">
-          <img :src="logo" alt="Logo" height="40" />
-        </div>
-        <div v-for="nav in navItems" :key="nav.id" class="link-wrapper">
-          <router-link :to="nav.link" class="link">
-            <span>
-              <i :class="['pi', nav.icon]" style="font-size: 1rem"></i
-            ></span>
-            {{ nav.text }}</router-link
-          >
+        <div class="sign-out-text">
+          <i class="pi pi-sign-out" style="font-size: 1rem"></i>
+          <p class="logout-text">Logout</p>
         </div>
       </div>
       <div class="component-wrapper">
@@ -50,11 +63,14 @@ const handleCloseMenu = () => {
           <div class="menu-toggle" @click="handleOpenMenu">
             <i class="pi pi-bars" style="font-size: 1rem"></i>
           </div>
-          <div>
-            <h3>Mubarak</h3>
+          <div class="name-logo-wrapper">
+            <div>
+              <span class="name-logo">{{ Nlogo }}</span>
+            </div>
+            <h3>{{ nameLogo }}</h3>
           </div>
         </div>
-        <slot></slot>
+        <slot class="slot-wrapper"></slot>
       </div>
     </div>
   </div>
@@ -62,7 +78,6 @@ const handleCloseMenu = () => {
 <style scoped>
 .container {
   display: flex;
-  gap: 20px;
   position: relative;
 }
 
@@ -74,6 +89,9 @@ const handleCloseMenu = () => {
   padding: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all ease-in-out 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {
@@ -96,6 +114,11 @@ const handleCloseMenu = () => {
 
 .pi {
   display: block;
+  color: #066316;
+}
+
+.logout-text {
+  font-weight: 600;
 }
 
 .link-wrapper {
@@ -123,6 +146,14 @@ const handleCloseMenu = () => {
   justify-content: space-between;
   padding-right: 20px;
   height: 45px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+}
+
+.sign-out-text {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .menu-toggle {
@@ -137,9 +168,7 @@ const handleCloseMenu = () => {
   .component-wrapper {
     width: 100%;
   }
-  .Navbar-wrapper {
-    padding: 10px;
-  }
+
   .menu-toggle {
     visibility: visible;
   }
@@ -151,5 +180,22 @@ const handleCloseMenu = () => {
     top: 10px;
     z-index: 10;
   }
+}
+
+.name-logo-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.name-logo {
+  background: #066316;
+  color: black;
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 5px;
+  font-weight: 600;
 }
 </style>
