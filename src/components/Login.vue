@@ -9,10 +9,13 @@ import {
   toastSuccessNotification,
 } from "../utils/util.js";
 import { checkPasswordValidator } from "../utils/passwordValidator";
+import { useRouter } from "vue-router";
+import { saveToLocalStorage } from "../utils/userDetails";
 
 const email = ref("");
 const password = ref("");
 const loading = ref(false);
+const router = useRouter();
 
 const handleSubmitData = async () => {
   try {
@@ -32,6 +35,8 @@ const handleSubmitData = async () => {
     );
     if (response.status === 200) {
       toastSuccessNotification(response.data.message);
+      saveToLocalStorage(response?.data.user);
+      router.push("/dashboard");
     }
   } catch (error) {
     toastErrorNotification(error.response.data.message);
