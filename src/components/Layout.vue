@@ -9,7 +9,6 @@ const userData = getFromLocalStorage("user-details");
 const name = userData?.name.split(" ");
 const nameLogo = name[0];
 const Nlogo = nameLogo?.substring(0, 1);
-console.log(Nlogo);
 
 const navItems = [
   {

@@ -1,6 +1,6 @@
-const saveToLocalStorage = (data) => {
+const saveToLocalStorage = (key, data) => {
   const payload = JSON.stringify(data);
-  localStorage.setItem("user-details", payload);
+  localStorage.setItem(key, payload);
 };
 
 const getFromLocalStorage = (key) => {
