@@ -4,8 +4,6 @@ import Card from "../components/base/Card.vue";
 import Title from "../components/base/TitleText.vue";
 import { ref, onMounted } from "vue";
 import { axiosInstance } from "../services/axiosInstance";
-import { ContentLoader } from "vue-content-loader";
-import { Skeleton } from "vue-loading-skeleton";
 import { formatIncomingDate } from "../utils/date";
 
 const blogs = ref([]);
