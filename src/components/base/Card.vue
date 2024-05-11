@@ -130,6 +130,12 @@ h4 {
   justify-content: space-between;
 }
 
+@media (max-width: 600px) {
+  .card-container {
+    width: 85vw;
+  }
+}
+
 .date_action_container {
   display: flex;
   justify-content: space-between;

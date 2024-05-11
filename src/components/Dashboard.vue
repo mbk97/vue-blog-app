@@ -38,7 +38,7 @@ onMounted(() => {
         <div v-if="loading">
           <h3>Loading...</h3>
         </div>
-        <div v-else>
+        <div v-else class="card-wrapper">
           <div v-if="blogs.length === 0">
             <p>No content is created.</p>
           </div>
