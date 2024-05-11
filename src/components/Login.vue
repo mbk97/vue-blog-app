@@ -35,7 +35,7 @@ const handleSubmitData = async () => {
     );
     if (response.status === 200) {
       toastSuccessNotification(response.data.message);
-      saveToLocalStorage(response?.data.user);
+      saveToLocalStorage("user-details", response?.data.user);
       router.push("/dashboard");
     }
   } catch (error) {
