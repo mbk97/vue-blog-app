@@ -89,6 +89,10 @@ const handleUpdate = (id, title, description) => {
             @click="deleteBlogPost(id)"
           ></i>
         </span>
+
+        <router-link :to="'/view-more/' + id" class="router">
+          <i class="pi pi-eye" style="font-size: 1rem"></i>
+        </router-link>
       </div>
       <div class="date-container">
         <p>{{ date }}</p>
@@ -151,5 +155,15 @@ h4 {
 .pi-pen-to-square {
   margin-right: 10px;
   cursor: pointer;
+  color: #066316;
+}
+
+.pi-eye {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.router {
+  color: #066316;
 }
 </style>

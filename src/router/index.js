@@ -3,6 +3,7 @@ import Login from "../views/LoginView.vue";
 import Register from "../views/RegisterView.vue";
 import Dashboard from "../views/DashboardView.vue";
 import Create from "../views/CreateView.vue";
+import ViewMore from "../views/ViewMore.vue";
 const routes = [
   {
     path: "/",
@@ -23,6 +24,11 @@ const routes = [
     path: "/create",
     name: "Create",
     component: Create,
+  },
+  {
+    path: "/view-more/:id",
+    name: "ViewMore",
+    component: ViewMore,
   },
 ];
 
